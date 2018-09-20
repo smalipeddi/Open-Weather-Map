@@ -5,6 +5,58 @@ var app = angular.module('openWeatherApp', []);
 */
 app.factory('weatherService', weatherService);
 
+/**
+  * Controller 
+*/
+
+app.controller('OWAController', ['$scope', '$http', '$log' , 'weatherService' ,function($scope, $http, $log, weatherService ) {
+
+  $scope.weatherDetailsOfAllCities = [];
+  $scope.unit = {
+        name: 'metric'
+  };
+
+  $scope.submit = function() {
+	  weatherService.getWeatherDetails().then(function(response) {
+	  	console.log(response);
+	  	console.log("sunitha");
+	    $scope.weatherInfo = response.data;
+	    $scope.hideTable = true;
+	    $scope.weatherInfo.length === 0 ? $scope.hideTable : !($scope.hideTable);
+	  
+	    $scope.data = {};
+	    $scope.data.city = $scope.weatherInfo.name;
+	    $scope.data.country = $scope.weatherInfo.sys.country;
+	    $scope.data.temperature = $scope.weatherInfo.main.temp;
+
+        $scope.data.wind = $scope.weatherInfo.wind.speed;
+	    $scope.data.cloud = $scope.weatherInfo.weather[0].description;
+
+	    var sunrise = new Date($scope.weatherInfo.sys.sunrise * 1000).toLocaleString();
+	    $scope.data.sunrise = moment(sunrise).format('hh:mm');
+
+	    var sunset = new Date($scope.weatherInfo.sys.sunset * 1000).toLocaleString();
+	    $scope.data.sunset = moment(sunset).format('hh:mm');
+
+	    $scope.weatherDetailsOfAllCities.push($scope.data);
+	    $log.info($scope.data);
+	    $scope.city = "";
+
+	    
+	  },function(reason){
+	  	$scope.error = reason.data.message;
+	  	$log.info = reason.data.message;
+	  	alert($log.info);
+
+
+	  });
+  }
+
+  $scope.orderByMe = function(x) {
+    $scope.myOrderBy = x;
+  }
+}]);
+
 
 function weatherService($http) {
  return {
@@ -94,46 +146,3 @@ app.filter('capitalize', function() {
     }
 });
 
-
-/**
-  * Controller 
-*/
-
-app.controller('OWAController', ['$scope', '$http', 'weatherService' ,function($scope, $http, weatherService ) {
-
-  $scope.weatherDetailsOfAllCities = [];
-  $scope.unit = {
-        name: 'metric'
-  };
-
-  $scope.submit = function() {
-	  weatherService.getWeatherDetails().then(function(response) {
-	    $scope.weatherInfo = response.data;
-	    $scope.hideTable = true;
-	    $scope.weatherInfo.length === 0 ? $scope.hideTable : !($scope.hideTable);
-	  
-	    $scope.data = {};
-	    $scope.data.city = $scope.weatherInfo.name;
-	    $scope.data.country = $scope.weatherInfo.sys.country;
-	    $scope.data.temperature = $scope.weatherInfo.main.temp;
-
-        $scope.data.wind = $scope.weatherInfo.wind.speed;
-	    $scope.data.cloud = $scope.weatherInfo.weather[0].description;
-
-	    var sunrise = new Date($scope.weatherInfo.sys.sunrise * 1000).toLocaleString();
-	    $scope.data.sunrise = moment(sunrise).format('hh:mm');
-
-	    var sunset = new Date($scope.weatherInfo.sys.sunset * 1000).toLocaleString();
-	    $scope.data.sunset = moment(sunset).format('hh:mm');
-
-	    $scope.weatherDetailsOfAllCities.push($scope.data);
-	    $scope.city = "";
-
-	    
-	  });
-  }
-
-  $scope.orderByMe = function(x) {
-    $scope.myOrderBy = x;
-  }
-}]);
