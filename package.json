@@ -1,0 +1,17 @@
+{
+  "name": "open-weather-map-package",
+  "version": "1.0.0",
+  "description": "Package for Open Weather Map Angular Application",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sunitha Malipeddi",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.7.4",
+    "bootstrap": "^4.1.3",
+    "moment": "^2.22.2",
+    
+  }
+}
