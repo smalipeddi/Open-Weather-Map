@@ -16,4 +16,8 @@ run the command
 
 "http-server -a localhost -p 8000"
 
+On the brower window type
+
+"localhost:8000" to view the UI 
+
 
