@@ -14,99 +14,100 @@
          <h1>Open Weather Map Application</h1>
       </div>
       <div class="container">
-         <form class="form-horizontal"  ng-submit="submit()">
-           <!--  <div class="form-group">
-               <label class="control-label col-sm-2 hide" for="error">{{error}}</label>
-                -->
-            </div>
-            <div class="form-group">
-               <label class="control-label col-sm-2" for="city">City :</label>
-               <div class="col-sm-10">
-                  <input type="input" ng-model="city" class="form-control" id="city" placeholder="Enter City " name="city" required >
-               </div>
-            </div>
-
-                <p class="text-danger" ng-show="isError()" id="error">{{error}}</p>
-            
-            
-            <div class="form-group" >
-               <div class="col-sm-offset-2 col-sm-10">
-                  <div class="radio">
+         <div class="row">
+            <div class="col-sm-10">
+            <form  ng-submit="submit()">
+               <div class="form-group">
+                  <label class="control-label col-sm-2" for="city">City :</label>
+                  <div class="col-sm-10">
+                     <input type="input" ng-model="city" class="form-control" id="city" placeholder="Enter City " name="city" required >
                   </div>
                </div>
-               <div class="col-sm-offset-2 col-sm-10">
-                  <div class="radio">
-                     <label class="radio-inline"><input type="radio" name = "metric" ng-model="unit.name" value="metric" checked> Metric</label>
-                     <label class="radio-inline"><input type="radio" name = "imperial" ng-model="unit.name" value="imperial" > Imperial</label>
+               <p class="text-danger" ng-show="isError()" id="error">{{error}}</p>
+               <div class="form-group" >
+                  <div class="col-sm-offset-2 col-sm-10">
+                     <div class="radio">
+                     </div>
+                  </div>
+                  <div class="col-sm-offset-2 col-sm-10">
+                     <div class="radio">
+                        <label class="radio-inline"><input type="radio" name = "metric" ng-model="unit.name" value="metric" checked> Metric</label>
+                        <label class="radio-inline"><input type="radio" name = "imperial" ng-model="unit.name" value="imperial" > Imperial</label>
+                     </div>
                   </div>
                </div>
-            </div>
-            <div class="form-group">
-               <div class="col-sm-offset-2 col-sm-10">
-                  <button class="btn btn-danger" type="submit" class="btn btn-default">Get Weather </button>
+               <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                     <button class="btn btn-danger" type="submit" class="btn btn-default">Get Weather </button>
+                  </div>
                </div>
-            </div>
-         </form>
-         <table border="1" ng-show="hideTable" class="table table-hover">
-            <th>
-               <a href="#" ng-click="orderByField='city'; reverseSort = !reverseSort"> City
-               <span ng-show="orderByField == 'city'">
-               <span ng-show="!reverseSort" class="glyphicon glyphicon-chevron-up" aria-hidden="false"></span>
-               <span ng-show="reverseSort" class="glyphicon glyphicon-chevron-down" aria-hidden="true">v</span>
-               </span>
-               </a>
-            </th>
-            <th> 
-               <a href="#" ng-click="orderByField='temperature'; reverseSort = !reverseSort"> Temperature
-               <span ng-show="orderByField == 'temperature'">
-               <span ng-show="!reverseSort" class="glyphicon glyphicon-chevron-up" aria-hidden="false"></span>
-               <span ng-show="reverseSort" class="glyphicon glyphicon-chevron-down" aria-hidden="false">v</span>
-               </span>
-               </a>
-            </th>
-            <th> 
-               <a href="#" ng-click="orderByField='wind'; reverseSort = !reverseSort"> Wind Speed
-               <span ng-show="orderByField == 'wind'">
-               <span ng-show="!reverseSort" class="glyphicon glyphicon-chevron-up" aria-hidden="false"></span>
-               <span ng-show="reverseSort" class="glyphicon glyphicon-chevron-down" aria-hidden="false">v</span>
-               </span>
-               </a>
-            </th>
-            <th> 
-               <a href="#" ng-click="orderByField='cloud'; reverseSort = !reverseSort"> Cloud 
-               <span ng-show="orderByField == 'cloud'">
-               <span ng-show="!reverseSort" class="glyphicon glyphicon-chevron-up" aria-hidden="false"></span>
-               <span ng-show="reverseSort" class="glyphicon glyphicon-chevron-down" aria-hidden="false">v</span>
-               </span>
-               </a> 
-            </th>
-            <th> 
-               <a href="#" ng-click="orderByField='sunrise'; reverseSort = !reverseSort"> Sun Rise
-               <span ng-show="orderByField == 'sunrise'">
-               <span ng-show="!reverseSort" class="glyphicon glyphicon-chevron-up" aria-hidden="false"></span>
-               <span ng-show="reverseSort" class="glyphicon glyphicon-chevron-down" aria-hidden="false">v</span>
-               </span>
-               </a>
-            </th>
-            <th>
-               <a href="#" ng-click="orderByField='sunset'; reverseSort = !reverseSort"> Sun Set
-               <span ng-show="orderByField == 'sunset'">
-               <span ng-show="!reverseSort" class="glyphicon glyphicon-chevron-up" aria-hidden="false"></span>
-               <span ng-show="!reverseSort" class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-               <span ng-show="reverseSort" class="glyphicon glyphicon-chevron-down" aria-hidden="false">v</span>
-               </span>
-               </a>
-            </th>
-            <tr ng-repeat="details in weatherDetailsOfAllCities |orderBy:orderByField:reverseSort ">
-               <td>{{details.city }}  , {{details.country}}</td>
-               <td>{{details.temperature | formatTemperatureFilter : unit.name }}</td>
-               <td>{{details.wind | formatWindFilter : unit.name }}</td>
-               <td>{{details.cloud | capitalize }}</td>
-               <td>{{details.sunrise}} AM </td>
-               <td>{{details.sunset}} PM </td>
-            </tr>
-         </table>
+            </form>
+            <table border="1" ng-show="hideTable" class="table table-hover table-striped">
+               <thead class="thead-light">
+                  <tr>
+                     <th>
+                        <a href="#" ng-click="orderByField='city'; reverseSort = !reverseSort"> City
+                        <span ng-show="orderByField == 'city'">
+                        <span ng-show="!reverseSort" class="glyphicon glyphicon-chevron-up" aria-hidden="false"></span>
+                        <span ng-show="reverseSort" class="glyphicon glyphicon-chevron-down" aria-hidden="true">v</span>
+                        </span>
+                        </a>
+                     </th>
+                     <th> 
+                        <a href="#" ng-click="orderByField='temperature'; reverseSort = !reverseSort"> Temperature
+                        <span ng-show="orderByField == 'temperature'">
+                        <span ng-show="!reverseSort" class="glyphicon glyphicon-chevron-up" aria-hidden="false"></span>
+                        <span ng-show="reverseSort" class="glyphicon glyphicon-chevron-down" aria-hidden="false">v</span>
+                        </span>
+                        </a>
+                     </th>
+                     <th> 
+                        <a href="#" ng-click="orderByField='wind'; reverseSort = !reverseSort"> Wind Speed
+                        <span ng-show="orderByField == 'wind'">
+                        <span ng-show="!reverseSort" class="glyphicon glyphicon-chevron-up" aria-hidden="false"></span>
+                        <span ng-show="reverseSort" class="glyphicon glyphicon-chevron-down" aria-hidden="false">v</span>
+                        </span>
+                        </a>
+                     </th>
+                     <th> 
+                        <a href="#" ng-click="orderByField='cloud'; reverseSort = !reverseSort"> Cloud 
+                        <span ng-show="orderByField == 'cloud'">
+                        <span ng-show="!reverseSort" class="glyphicon glyphicon-chevron-up" aria-hidden="false"></span>
+                        <span ng-show="reverseSort" class="glyphicon glyphicon-chevron-down" aria-hidden="false">v</span>
+                        </span>
+                        </a> 
+                     </th>
+                     <th> 
+                        <a href="#" ng-click="orderByField='sunrise'; reverseSort = !reverseSort"> Sun Rise
+                        <span ng-show="orderByField == 'sunrise'">
+                        <span ng-show="!reverseSort" class="glyphicon glyphicon-chevron-up" aria-hidden="false"></span>
+                        <span ng-show="reverseSort" class="glyphicon glyphicon-chevron-down" aria-hidden="false">v</span>
+                        </span>
+                        </a>
+                     </th>
+                     <th>
+                        <a href="#" ng-click="orderByField='sunset'; reverseSort = !reverseSort"> Sun Set
+                        <span ng-show="orderByField == 'sunset'">
+                        <span ng-show="!reverseSort" class="glyphicon glyphicon-chevron-up" aria-hidden="false"></span>
+                        <span ng-show="!reverseSort" class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                        <span ng-show="reverseSort" class="glyphicon glyphicon-chevron-down" aria-hidden="false">v</span>
+                        </span>
+                        </a>
+                     </th>
+                  </tr>
+               </thead>
+               <tr ng-repeat="details in weatherDetailsOfAllCities |orderBy:orderByField:reverseSort ">
+                  <td>{{details.city }}  , {{details.country}}</td>
+                  <td>{{details.temperature | formatTemperatureFilter : unit.name }}</td>
+                  <td>{{details.wind | formatWindFilter : unit.name }}</td>
+                  <td>{{details.cloud | capitalize }}</td>
+                  <td>{{details.sunrise}} AM </td>
+                  <td>{{details.sunset}} PM </td>
+               </tr>
+            </table>
+         </div>
       </div>
+   </div>
       </div>
       </div>
       <!-- JS Files -->

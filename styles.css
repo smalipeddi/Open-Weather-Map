@@ -34,11 +34,12 @@ body {
  }
  table a{
   color: black;
-  text-decoration-style: bold;
+  font-style: italic;
   font-family: Montserrat, sans-serif;
  }
  p#error{
   padding-left : 20px;
 
-
  }
+
+
