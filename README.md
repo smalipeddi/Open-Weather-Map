@@ -1,10 +1,10 @@
-This is a Angular Application to get weather deatils of any city from Open Weather Map 
+This is a Angular Application to get weather details of any city from Open Weather Map API.
 
 NPM is used to install the required modules/libraries for this application.
 
 The libraries/frameworks used for this application are as follows:
 
-1. Angular
+1.Angular
 2.Bootstrap 
 3.moment - library for time format
 
@@ -19,5 +19,4 @@ run the command
 On the brower window type
 
 "localhost:8000" to view the UI 
-
 

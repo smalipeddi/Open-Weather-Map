@@ -29,7 +29,6 @@ body {
   label{
   	width: 100px;
   }
- 
  button{
  	margin-left: 200px;
  }
@@ -37,4 +36,9 @@ body {
   color: black;
   text-decoration-style: bold;
   font-family: Montserrat, sans-serif;
+ }
+ p#error{
+  padding-left : 20px;
+
+
  }

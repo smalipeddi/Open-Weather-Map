@@ -9,7 +9,7 @@ app.factory('weatherService', weatherService);
  * Controller 
  */
 
-app.controller('OWAController', ['$scope', '$http', '$log', 'weatherService', function ($scope, $http, $log, weatherService)
+app.controller('OWAController', ['$scope', '$http', 'weatherService', function ($scope, $http, weatherService)
 {
 
 	$scope.weatherDetailsOfAllCities = [];
@@ -41,16 +41,28 @@ app.controller('OWAController', ['$scope', '$http', '$log', 'weatherService', fu
 			$scope.data.sunset = moment(sunset).format('hh:mm');
 
 			$scope.weatherDetailsOfAllCities.push($scope.data);
-			$log.info = ($scope.data);
+			
+			if(response !== null || response !== "" || response !== undefined){
+				$scope.isError = function(){
+					return false;
+				}
+			}
 			$scope.city = "";
-
 
 		}, function (reason)
 		{
-			$scope.error = reason.data.message;
-			$log.info = reason.data.message;
-			alert($log.info);
 
+			$scope.error  = reason.data.message.charAt(0).toUpperCase() + reason.data.message.substr(1).toLowerCase() + " Please Enter another city" ;
+			
+			if(reason !== null || reason !== "" || dareasonta !== undefined){
+				$scope.isError = function(){
+					return true;
+				}
+			}
+			
+			$scope.city = "";
+			var city = document.getElementById('city');
+			city.innerHTML= "";
 
 		});
 	}
